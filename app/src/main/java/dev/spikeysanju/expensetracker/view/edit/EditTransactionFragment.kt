@@ -9,7 +9,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentEditTransactionBinding
-import dev.spikeysanju.expensetracker.model.Transaction
+import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.utils.Constants
 import dev.spikeysanju.expensetracker.view.base.BaseFragment
 import dev.spikeysanju.expensetracker.view.main.viewmodel.TransactionViewModel
@@ -17,7 +17,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import parseDouble
 import snack
 import transformIntoDatePicker
-import java.util.*
+import java.util.Date
 
 class EditTransactionFragment : BaseFragment<FragmentEditTransactionBinding, TransactionViewModel>() {
     private val args: EditTransactionFragmentArgs by navArgs()
@@ -31,7 +31,7 @@ class EditTransactionFragment : BaseFragment<FragmentEditTransactionBinding, Tra
         loadData(transaction)
     }
 
-    private fun loadData(transaction: Transaction) = with(binding) {
+    private fun loadData(transaction: TransactionModel) = with(binding) {
         addTransactionLayout.etTitle.setText(transaction.title)
         addTransactionLayout.etAmount.setText(transaction.amount.toString())
         addTransactionLayout.etTransactionType.setText(transaction.transactionType, false)
@@ -65,7 +65,7 @@ class EditTransactionFragment : BaseFragment<FragmentEditTransactionBinding, Tra
         )
         btnSaveTransaction.setOnClickListener {
             binding.addTransactionLayout.apply {
-                val (title, amount, transactionType, tag, date, note) =
+                val (_, title, amount, transactionType, tag, date, note) =
                     getTransactionContent()
                 // validate if transaction content is empty or not
                 when {
@@ -102,7 +102,7 @@ class EditTransactionFragment : BaseFragment<FragmentEditTransactionBinding, Tra
         }
     }
 
-    private fun getTransactionContent(): Transaction = binding.addTransactionLayout.let {
+    private fun getTransactionContent(): TransactionModel = binding.addTransactionLayout.let {
 
         val id = args.transaction.id
         val title = it.etTitle.text.toString()
@@ -112,7 +112,7 @@ class EditTransactionFragment : BaseFragment<FragmentEditTransactionBinding, Tra
         val date = it.etWhen.text.toString()
         val note = it.etNote.text.toString()
 
-        return Transaction(
+        return TransactionModel(
             title = title,
             amount = amount,
             transactionType = transactionType,

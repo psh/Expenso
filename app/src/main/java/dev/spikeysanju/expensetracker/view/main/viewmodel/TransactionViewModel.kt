@@ -5,14 +5,13 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dev.spikeysanju.expensetracker.data.local.datastore.UIModeDataStore
-import dev.spikeysanju.expensetracker.model.Transaction
+import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.repo.TransactionRepo
 import dev.spikeysanju.expensetracker.services.exportcsv.ExportCsvService
 import dev.spikeysanju.expensetracker.services.exportcsv.toCsv
 import dev.spikeysanju.expensetracker.utils.viewState.DetailState
 import dev.spikeysanju.expensetracker.utils.viewState.ExportState
 import dev.spikeysanju.expensetracker.utils.viewState.ViewState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -58,7 +57,7 @@ class TransactionViewModel(
         _exportCsvState.value = ExportState.Loading
         transactionRepo
             .getAllTransactions()
-            .flowOn(Dispatchers.IO)
+            .flowOn(IO)
             .map { it.toCsv() }
             .flatMapMerge { exportService.writeToCSV(csvFileUri, it) }
             .catch { error ->
@@ -69,17 +68,17 @@ class TransactionViewModel(
     }
 
     // insert transaction
-    fun insertTransaction(transaction: Transaction) = viewModelScope.launch {
+    fun insertTransaction(transaction: TransactionModel) = viewModelScope.launch {
         transactionRepo.insert(transaction)
     }
 
     // update transaction
-    fun updateTransaction(transaction: Transaction) = viewModelScope.launch {
+    fun updateTransaction(transaction: TransactionModel) = viewModelScope.launch {
         transactionRepo.update(transaction)
     }
 
     // delete transaction
-    fun deleteTransaction(transaction: Transaction) = viewModelScope.launch {
+    fun deleteTransaction(transaction: TransactionModel) = viewModelScope.launch {
         transactionRepo.delete(transaction)
     }
 
@@ -98,7 +97,7 @@ class TransactionViewModel(
     // get transaction by id
     fun getByID(id: Int) = viewModelScope.launch {
         _detailState.value = DetailState.Loading
-        transactionRepo.getByID(id).collect { result: Transaction? ->
+        transactionRepo.getByID(id).collect { result: TransactionModel? ->
             if (result != null) {
                 _detailState.value = DetailState.Success(result)
             }

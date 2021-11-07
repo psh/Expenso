@@ -21,7 +21,7 @@ import androidx.navigation.fragment.navArgs
 import cleanTextContent
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentTransactionDetailsBinding
-import dev.spikeysanju.expensetracker.model.Transaction
+import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.utils.saveBitmap
 import dev.spikeysanju.expensetracker.utils.viewState.DetailState
 import dev.spikeysanju.expensetracker.view.base.BaseFragment
@@ -89,7 +89,7 @@ class TransactionDetailsFragment : BaseFragment<FragmentTransactionDetailsBindin
         }
     }
 
-    private fun onDetailsLoaded(transaction: Transaction) = with(binding.transactionDetails) {
+    private fun onDetailsLoaded(transaction: TransactionModel) = with(binding.transactionDetails) {
         title.text = transaction.title
         amount.text = indianRupee(transaction.amount).cleanTextContent
         type.text = transaction.transactionType

@@ -1,7 +1,7 @@
 package dev.spikeysanju.expensetracker.services.exportcsv
 
 import com.opencsv.bean.CsvBindByName
-import dev.spikeysanju.expensetracker.model.Transaction
+import dev.spikeysanju.expensetracker.repo.TransactionModel
 
 data class TransactionsCSV(
     @CsvBindByName(column = "title")
@@ -20,7 +20,7 @@ data class TransactionsCSV(
     val createdAtDate: String
 )
 
-fun List<Transaction>.toCsv() = map {
+fun List<TransactionModel>.toCsv() = map {
     TransactionsCSV(
         title = it.title,
         amount = it.amount,
@@ -31,3 +31,5 @@ fun List<Transaction>.toCsv() = map {
         createdAtDate = it.createdAtDateFormat,
     )
 }
+
+

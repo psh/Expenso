@@ -22,7 +22,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentDashboardBinding
-import dev.spikeysanju.expensetracker.model.Transaction
+import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.services.exportcsv.CreateCsvContract
 import dev.spikeysanju.expensetracker.services.exportcsv.OpenCsvContract
 import dev.spikeysanju.expensetracker.utils.viewState.ExportState
@@ -125,15 +125,15 @@ class DashboardFragment :
                 // get item position & delete notes
                 val position = viewHolder.adapterPosition
                 val transaction = transactionAdapter.differ.currentList[position]
-                val transactionItem = Transaction(
+                val transactionItem = TransactionModel(
+                    transaction.id,
                     transaction.title,
                     transaction.amount,
                     transaction.transactionType,
                     transaction.tag,
                     transaction.date,
                     transaction.note,
-                    transaction.createdAt,
-                    transaction.id
+                    transaction.createdAt
                 )
                 viewModel.deleteTransaction(transactionItem)
                 Snackbar.make(
@@ -158,7 +158,7 @@ class DashboardFragment :
         }
     }
 
-    private fun onTotalTransactionLoaded(transaction: List<Transaction>) = with(binding) {
+    private fun onTotalTransactionLoaded(transaction: List<TransactionModel>) = with(binding) {
         val (totalIncome, totalExpense) = transaction.partition { it.transactionType == "Income" }
         val income = totalIncome.sumOf { it.amount }
         val expense = totalExpense.sumOf { it.amount }
@@ -200,7 +200,7 @@ class DashboardFragment :
         emptyStateLayout.show()
     }
 
-    private fun onTransactionLoaded(list: List<Transaction>) =
+    private fun onTransactionLoaded(list: List<TransactionModel>) =
         transactionAdapter.differ.submitList(list)
 
     private fun initViews() = with(binding) {
