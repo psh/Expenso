@@ -27,7 +27,6 @@ import dev.spikeysanju.expensetracker.services.exportcsv.CreateCsvContract
 import dev.spikeysanju.expensetracker.services.exportcsv.OpenCsvContract
 import dev.spikeysanju.expensetracker.utils.viewState.ExportState
 import dev.spikeysanju.expensetracker.utils.viewState.ViewState
-import dev.spikeysanju.expensetracker.view.adapter.TransactionAdapter
 import dev.spikeysanju.expensetracker.view.base.BaseFragment
 import dev.spikeysanju.expensetracker.view.main.viewmodel.TransactionViewModel
 import hide
@@ -124,17 +123,7 @@ class DashboardFragment :
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // get item position & delete notes
                 val position = viewHolder.adapterPosition
-                val transaction = transactionAdapter.differ.currentList[position]
-                val transactionItem = TransactionModel(
-                    transaction.id,
-                    transaction.title,
-                    transaction.amount,
-                    transaction.transactionType,
-                    transaction.tag,
-                    transaction.date,
-                    transaction.note,
-                    transaction.createdAt
-                )
+                val transactionItem = transactionAdapter.currentList[position]
                 viewModel.deleteTransaction(transactionItem)
                 Snackbar.make(
                     binding.root,
@@ -201,7 +190,7 @@ class DashboardFragment :
     }
 
     private fun onTransactionLoaded(list: List<TransactionModel>) =
-        transactionAdapter.differ.submitList(list)
+        transactionAdapter.submitList(list)
 
     private fun initViews() = with(binding) {
         btnAddTransaction.setOnClickListener {
