@@ -10,8 +10,8 @@ import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentAddTransactionBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.utils.Constants
-import dev.spikeysanju.expensetracker.view.base.BaseFragment
-import dev.spikeysanju.expensetracker.view.main.viewmodel.TransactionViewModel
+import dev.spikeysanju.expensetracker.view.BaseFragment
+import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import parseDouble
 import snack

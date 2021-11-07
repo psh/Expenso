@@ -27,15 +27,6 @@ inline fun View.snack(
     snack.show()
 }
 
-fun Snackbar.action(
-    @StringRes text: Int,
-    color: Int? = null,
-    listener: (View) -> Unit
-) {
-    setAction(text, listener)
-    color?.let { setActionTextColor(ContextCompat.getColor(context, color)) }
-}
-
 fun TextInputEditText.transformIntoDatePicker(
     context: Context,
     format: String,
@@ -77,21 +68,6 @@ fun indianRupee(amount: Double): String {
     format.currency = Currency.getInstance("INR")
     return format.format(amount)
 }
-
-val String.cleanTextContent: String
-    get() {
-        // strips off all non-ASCII characters
-        var text = this
-        text = text.replace("[^\\x00-\\x7F]".toRegex(), "")
-
-        // erases all the ASCII control characters
-        text = text.replace("[\\p{Cntrl}&&[^\r\n\t]]".toRegex(), "")
-
-        // removes non-printable characters from Unicode
-        text = text.replace("\\p{C}".toRegex(), "")
-        text = text.replace(",".toRegex(), "")
-        return text.trim()
-    }
 
 // parse string to double
 fun parseDouble(value: String?): Double {

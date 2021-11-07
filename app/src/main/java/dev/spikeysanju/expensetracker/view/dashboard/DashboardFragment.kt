@@ -1,6 +1,5 @@
 package dev.spikeysanju.expensetracker.view.dashboard
 
-import action
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,6 +12,8 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
 import android.widget.TextView
+import androidx.annotation.StringRes
+import androidx.core.content.ContextCompat
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -23,12 +24,10 @@ import com.google.android.material.snackbar.Snackbar
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentDashboardBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
-import dev.spikeysanju.expensetracker.services.exportcsv.CreateCsvContract
-import dev.spikeysanju.expensetracker.services.exportcsv.OpenCsvContract
-import dev.spikeysanju.expensetracker.utils.viewState.ExportState
-import dev.spikeysanju.expensetracker.utils.viewState.ViewState
-import dev.spikeysanju.expensetracker.view.base.BaseFragment
-import dev.spikeysanju.expensetracker.view.main.viewmodel.TransactionViewModel
+import dev.spikeysanju.expensetracker.view.main.ExportState
+import dev.spikeysanju.expensetracker.view.main.ViewState
+import dev.spikeysanju.expensetracker.view.BaseFragment
+import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
 import hide
 import indianRupee
 import kotlinx.coroutines.flow.collect
@@ -338,5 +337,14 @@ class DashboardFragment :
             viewModel.setDarkMode(false)
             item.setIcon(R.drawable.ic_day)
         }
+    }
+
+    private fun Snackbar.action(
+        @StringRes text: Int,
+        color: Int? = null,
+        listener: (View) -> Unit
+    ) {
+        setAction(text, listener)
+        color?.let { setActionTextColor(ContextCompat.getColor(context, color)) }
     }
 }

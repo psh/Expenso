@@ -18,14 +18,12 @@ import androidx.core.view.drawToBitmap
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
-import cleanTextContent
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentTransactionDetailsBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
-import dev.spikeysanju.expensetracker.utils.saveBitmap
-import dev.spikeysanju.expensetracker.utils.viewState.DetailState
-import dev.spikeysanju.expensetracker.view.base.BaseFragment
-import dev.spikeysanju.expensetracker.view.main.viewmodel.TransactionViewModel
+import dev.spikeysanju.expensetracker.view.main.DetailState
+import dev.spikeysanju.expensetracker.view.BaseFragment
+import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
 import hide
 import indianRupee
 import kotlinx.coroutines.flow.collect
@@ -194,4 +192,19 @@ class TransactionDetailsFragment : BaseFragment<FragmentTransactionDetailsBindin
         inflater: LayoutInflater,
         container: ViewGroup?
     ) = FragmentTransactionDetailsBinding.inflate(inflater, container, false)
+
+    private val String.cleanTextContent: String
+        get() {
+            // strips off all non-ASCII characters
+            var text = this
+            text = text.replace("[^\\x00-\\x7F]".toRegex(), "")
+
+            // erases all the ASCII control characters
+            text = text.replace("[\\p{Cntrl}&&[^\r\n\t]]".toRegex(), "")
+
+            // removes non-printable characters from Unicode
+            text = text.replace("\\p{C}".toRegex(), "")
+            text = text.replace(",".toRegex(), "")
+            return text.trim()
+        }
 }

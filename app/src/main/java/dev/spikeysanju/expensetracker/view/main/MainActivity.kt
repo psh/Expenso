@@ -10,7 +10,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.ActivityMainBinding
-import dev.spikeysanju.expensetracker.view.main.viewmodel.TransactionViewModel
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.viewModel
 

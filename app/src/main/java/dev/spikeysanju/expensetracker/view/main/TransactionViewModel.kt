@@ -1,17 +1,11 @@
-package dev.spikeysanju.expensetracker.view.main.viewmodel
+package dev.spikeysanju.expensetracker.view.main
 
 import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import dev.spikeysanju.expensetracker.data.local.datastore.UIModeDataStore
 import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.repo.TransactionRepo
-import dev.spikeysanju.expensetracker.services.exportcsv.ExportCsvService
-import dev.spikeysanju.expensetracker.services.exportcsv.toCsv
-import dev.spikeysanju.expensetracker.utils.viewState.DetailState
-import dev.spikeysanju.expensetracker.utils.viewState.ExportState
-import dev.spikeysanju.expensetracker.utils.viewState.ViewState
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -120,4 +114,25 @@ class TransactionViewModel(
     fun overall() {
         _transactionFilter.value = "Overall"
     }
+}
+
+sealed class DetailState {
+    object Loading : DetailState()
+    object Empty : DetailState()
+    data class Success(val transaction: TransactionModel) : DetailState()
+    data class Error(val exception: Throwable) : DetailState()
+}
+
+sealed class ExportState {
+    object Loading : ExportState()
+    object Empty : ExportState()
+    data class Success(val fileUri: Uri) : ExportState()
+    data class Error(val exception: Throwable) : ExportState()
+}
+
+sealed class ViewState {
+    object Loading : ViewState()
+    object Empty : ViewState()
+    data class Success(val transaction: List<TransactionModel>) : ViewState()
+    data class Error(val exception: Throwable) : ViewState()
 }
