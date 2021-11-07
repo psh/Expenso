@@ -1,5 +1,7 @@
 package dev.spikeysanju.expensetracker.di
 
+import androidx.datastore.preferences.preferencesDataStore
+import com.russhwolf.settings.datastore.DataStoreSettings
 import dev.spikeysanju.expensetracker.data.local.AppDatabase
 import dev.spikeysanju.expensetracker.data.local.datastore.UIModeDataStore
 import dev.spikeysanju.expensetracker.repo.DriverFactory
@@ -11,11 +13,13 @@ import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+val android.content.Context.themePrefDataStore by preferencesDataStore("ui_mode_pref")
+
 val appModule = module {
 
     single {
         UIModeDataStore(
-            context = androidContext()
+            factory = { DataStoreSettings(androidContext().themePrefDataStore) }
         )
     }
 

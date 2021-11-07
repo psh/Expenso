@@ -1,34 +1,23 @@
 package dev.spikeysanju.expensetracker.data.local.datastore
 
-import android.content.Context
-import androidx.datastore.preferences.core.booleanPreferencesKey
-import androidx.datastore.preferences.core.edit
-import androidx.datastore.preferences.preferencesDataStore
+import com.russhwolf.settings.coroutines.FlowSettings
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
 
-val Context.themePrefDataStore by preferencesDataStore("ui_mode_pref")
+class UIModeDataStore(factory: () -> FlowSettings) : UIModeImpl {
 
-class UIModeDataStore(context: Context) : UIModeImpl {
-
-    private val dataStore = context.themePrefDataStore
+    private val settings: FlowSettings = factory()
 
     // used to get the data from datastore
     override val uiMode: Flow<Boolean>
-        get() = dataStore.data.map { preferences ->
-            val uiMode = preferences[UI_MODE_KEY] ?: false
-            uiMode
-        }
+        get() = settings.getBooleanFlow(UI_MODE_KEY_NAME, false)
 
     // used to save the ui preference to datastore
     override suspend fun saveToDataStore(isNightMode: Boolean) {
-        dataStore.edit { preferences ->
-            preferences[UI_MODE_KEY] = isNightMode
-        }
+        settings.putBoolean(UI_MODE_KEY_NAME, isNightMode)
     }
 
     companion object {
-        private val UI_MODE_KEY = booleanPreferencesKey("ui_mode")
+        private const val UI_MODE_KEY_NAME = "ui_mode"
     }
 }
 

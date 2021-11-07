@@ -62,6 +62,11 @@ dependencies {
     implementation("com.squareup.sqldelight:android-driver:1.5.2")
     implementation("com.squareup.sqldelight:coroutines-extensions-jvm:1.5.2")
 
+    // KMM Migration 3 - move to multiplatform settings
+    implementation("com.russhwolf:multiplatform-settings-coroutines:0.8.1")
+    implementation("com.russhwolf:multiplatform-settings-datastore:0.8.1")
+    implementation("androidx.datastore:datastore-preferences:1.0.0")
+
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.31")
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
@@ -87,9 +92,6 @@ dependencies {
 
     // RecyclerView
     implementation("androidx.recyclerview:recyclerview:1.2.1")
-
-    // Preference DataStore
-    implementation("androidx.datastore:datastore-preferences:1.0.0")
 
     // activity & fragment ktx
     implementation("androidx.fragment:fragment-ktx:1.3.6")
