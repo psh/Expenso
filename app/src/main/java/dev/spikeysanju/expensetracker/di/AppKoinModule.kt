@@ -1,8 +1,8 @@
 package dev.spikeysanju.expensetracker.di
 
-import androidx.room.Room
 import dev.spikeysanju.expensetracker.data.local.AppDatabase
 import dev.spikeysanju.expensetracker.data.local.datastore.UIModeDataStore
+import dev.spikeysanju.expensetracker.repo.DriverFactory
 import dev.spikeysanju.expensetracker.repo.TransactionRepo
 import dev.spikeysanju.expensetracker.services.exportcsv.ExportCsvService
 import dev.spikeysanju.expensetracker.view.about.AboutViewModel
@@ -20,11 +20,7 @@ val appModule = module {
     }
 
     single {
-        Room.databaseBuilder(
-            androidContext(),
-            AppDatabase::class.java,
-            "transaction.db"
-        ).fallbackToDestructiveMigration().build()
+        AppDatabase(driver = DriverFactory(androidContext()).createDriver())
     }
 
     single {
@@ -32,9 +28,7 @@ val appModule = module {
     }
 
     factory {
-        TransactionRepo(
-            db = get()
-        )
+        TransactionRepo(db = get())
     }
 
     viewModel {

@@ -50,7 +50,7 @@
         tools:layout="@layout/fragment_transaction_details">
         <argument
             android:name="transaction"
-            app:argType="dev.spikeysanju.expensetracker.model.Transaction" />
+            app:argType="dev.spikeysanju.expensetracker.repo.TransactionModel" />
         <action
             android:id="@+id/action_transactionDetailsFragment_to_editTransactionFragment"
             app:destination="@id/editTransactionFragment"
@@ -69,7 +69,7 @@
         tools:layout="@layout/fragment_edit_transaction">
         <argument
             android:name="transaction"
-            app:argType="dev.spikeysanju.expensetracker.model.Transaction" />
+            app:argType="dev.spikeysanju.expensetracker.repo.TransactionModel" />
         <action
             android:id="@+id/edit_to_details"
             app:destination="@id/transactionDetailsFragment" />

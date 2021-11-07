@@ -1,4 +1,5 @@
 plugins {
+    id("com.squareup.sqldelight")
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
@@ -50,13 +51,16 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
 }
 
 dependencies {
 
     // KMM Migration 1 - move to Koin
     implementation("io.insert-koin:koin-android:3.1.2")
+
+    // KMM Migration 2 - move to SqlDelight
+    implementation("com.squareup.sqldelight:android-driver:1.5.2")
+    implementation("com.squareup.sqldelight:coroutines-extensions-jvm:1.5.2")
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib:1.5.31")
     implementation("androidx.core:core-ktx:1.7.0")
@@ -67,14 +71,6 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.3")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
-
-    // Room
-    implementation("androidx.room:room-runtime:2.3.0")
-    kapt("androidx.room:room-compiler:2.3.0")
-    kapt("org.xerial:sqlite-jdbc:3.36.0.3")
-
-    // Kotlin Extensions and Coroutines support for Room
-    implementation("androidx.room:room-ktx:2.3.0")
 
     // Coroutines
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
@@ -106,4 +102,10 @@ dependencies {
     // OpenCsv
     implementation("com.opencsv:opencsv:5.3")
 
+}
+
+sqldelight {
+    database("AppDatabase") {
+        packageName = "dev.spikeysanju.expensetracker.data.local"
+    }
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.ItemTransactionLayoutBinding
-import dev.spikeysanju.expensetracker.model.Transaction
+import dev.spikeysanju.expensetracker.repo.TransactionModel
 import indianRupee
 
 class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVH>() {
@@ -16,12 +16,12 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVH
     inner class TransactionVH(val binding: ItemTransactionLayoutBinding) :
         RecyclerView.ViewHolder(binding.root)
 
-    private val differCallback = object : DiffUtil.ItemCallback<Transaction>() {
-        override fun areItemsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
+    private val differCallback = object : DiffUtil.ItemCallback<TransactionModel>() {
+        override fun areItemsTheSame(oldItem: TransactionModel, newItem: TransactionModel): Boolean {
             return oldItem.id == newItem.id
         }
 
-        override fun areContentsTheSame(oldItem: Transaction, newItem: Transaction): Boolean {
+        override fun areContentsTheSame(oldItem: TransactionModel, newItem: TransactionModel): Boolean {
             return oldItem == newItem
         }
     }
@@ -112,8 +112,8 @@ class TransactionAdapter : RecyclerView.Adapter<TransactionAdapter.TransactionVH
     }
 
     // on item click listener
-    private var onItemClickListener: ((Transaction) -> Unit)? = null
-    fun setOnItemClickListener(listener: (Transaction) -> Unit) {
+    private var onItemClickListener: ((TransactionModel) -> Unit)? = null
+    fun setOnItemClickListener(listener: (TransactionModel) -> Unit) {
         onItemClickListener = listener
     }
 }

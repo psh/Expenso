@@ -8,7 +8,7 @@ import android.widget.ArrayAdapter
 import androidx.navigation.fragment.findNavController
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentAddTransactionBinding
-import dev.spikeysanju.expensetracker.model.Transaction
+import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.utils.Constants
 import dev.spikeysanju.expensetracker.view.base.BaseFragment
 import dev.spikeysanju.expensetracker.view.main.viewmodel.TransactionViewModel
@@ -16,7 +16,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import parseDouble
 import snack
 import transformIntoDatePicker
-import java.util.*
+import java.util.Date
 
 class AddTransactionFragment :
     BaseFragment<FragmentAddTransactionBinding, TransactionViewModel>() {
@@ -53,7 +53,7 @@ class AddTransactionFragment :
             )
             btnSaveTransaction.setOnClickListener {
                 binding.addTransactionLayout.apply {
-                    val (title, amount, transactionType, tag, date, note) = getTransactionContent()
+                    val (_, title, amount, transactionType, tag, date, note) = getTransactionContent()
                     // validate if transaction content is empty or not
                     when {
                         title.isEmpty() -> {
@@ -90,7 +90,7 @@ class AddTransactionFragment :
         }
     }
 
-    private fun getTransactionContent(): Transaction = binding.addTransactionLayout.let {
+    private fun getTransactionContent(): TransactionModel = binding.addTransactionLayout.let {
         val title = it.etTitle.text.toString()
         val amount = parseDouble(it.etAmount.text.toString())
         val transactionType = it.etTransactionType.text.toString()
@@ -98,7 +98,7 @@ class AddTransactionFragment :
         val date = it.etWhen.text.toString()
         val note = it.etNote.text.toString()
 
-        return Transaction(title, amount, transactionType, tag, date, note)
+        return TransactionModel(0, title, amount, transactionType, tag, date, note, System.currentTimeMillis())
     }
 
     override fun getViewBinding(
