@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.details
+package dev.spikeysanju.expensetracker.details
 
 import android.Manifest
 import android.annotation.SuppressLint
@@ -22,15 +22,15 @@ import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentTransactionDetailsBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.main.DetailState
-import dev.spikeysanju.expensetracker.view.BaseFragment
-import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
+import dev.spikeysanju.expensetracker.utils.BaseFragment
+import dev.spikeysanju.expensetracker.main.TransactionViewModel
 import dev.spikeysanju.expensetracker.utils.formatDate
 import dev.spikeysanju.expensetracker.utils.hide
 import dev.spikeysanju.expensetracker.utils.indianRupee
-import kotlinx.coroutines.flow.collect
-import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import dev.spikeysanju.expensetracker.utils.show
 import dev.spikeysanju.expensetracker.utils.snack
+import kotlinx.coroutines.flow.collect
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class TransactionDetailsFragment : BaseFragment<FragmentTransactionDetailsBinding, TransactionViewModel>() {
     private val args: TransactionDetailsFragmentArgs by navArgs()

@@ -1,9 +1,7 @@
-package dev.spikeysanju.expensetracker.view
+package dev.spikeysanju.expensetracker.utils
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -15,22 +13,20 @@ abstract class BaseFragment<VB : ViewBinding, VM : ViewModel> : Fragment() {
     private var _binding: VB? = null
     protected val binding get() = _binding!!
     protected abstract val viewModel: VM
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        _binding = getViewBinding(inflater, container)
-        return binding.root
-    }
+    ) = getViewBinding(inflater, container).also {
+        _binding = it
+    }.root
 
     protected abstract fun getViewBinding(inflater: LayoutInflater, container: ViewGroup?): VB
 
     fun toast(message: String) {
         Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
     }
-
-    fun applicationContext(): Context = requireActivity().applicationContext
 
     override fun onDestroy() {
         super.onDestroy()

@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.edit
+package dev.spikeysanju.expensetracker.edit
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,8 @@ import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentEditTransactionBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.utils.Constants
-import dev.spikeysanju.expensetracker.view.BaseFragment
-import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
+import dev.spikeysanju.expensetracker.utils.BaseFragment
+import dev.spikeysanju.expensetracker.main.TransactionViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 import dev.spikeysanju.expensetracker.utils.parseDouble
 import dev.spikeysanju.expensetracker.utils.snack

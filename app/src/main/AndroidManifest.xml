@@ -18,7 +18,7 @@
         android:theme="@style/Theme.ExpenseTracker">
 
         <activity
-            android:name=".view.main.MainActivity"
+            android:name="dev.spikeysanju.expensetracker.main.MainActivity"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>

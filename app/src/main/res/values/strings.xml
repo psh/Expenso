@@ -34,14 +34,14 @@
     <string name="text_about_license">Licensed Under Apache 2.0 License</string>
     <string name="text_about_visit_title">Visit</string>
     <string name="text_about_visit_url"><u>https://github.com/Spikeysanju/Expenso</u></string>
-    <string name="text_app_version">v%s (%d)</string>
+    <string name="text_app_version">v%1$s (%2$d)</string>
     <string name="text_share_as_text">Share as Text</string>
     <string name="text_share_as_image">Share as Image</string>
     <string name="text_delete">Delete</string>
     <string name="text_share">Share</string>
 
     <!-- share transaction -->
-    <string name="share_message">\%s \nAmount: %s, \nTransaction-Type: %s, \nTag: %s, \nDate: %s, \nNote: %s, \nCreatedAt: %s \n\nVisit: https://github.com/Spikeysanju/Expenso</string>
+    <string name="share_message">\%1$s \nAmount: %2$s, \nTransaction-Type: %3$s, \nTag: %4$s, \nDate: %5$s, \nNote: %6$s, \nCreatedAt: %7$s \n\nVisit: https://github.com/Spikeysanju/Expenso</string>
     <string name="text_transaction_empty_title">No Transaction Yet!</string>
     <string name="text_transaction_empty_desc">After your first transaction you will be able to view it here</string>
     <string name="text_export_csv">Export to CSV</string>

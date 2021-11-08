@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.details
+package dev.spikeysanju.expensetracker.details
 
 import android.app.Activity
 import android.content.ContentValues

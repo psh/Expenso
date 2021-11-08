@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.about
+package dev.spikeysanju.expensetracker.about
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

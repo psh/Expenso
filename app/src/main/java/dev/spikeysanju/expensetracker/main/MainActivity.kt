@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.main
+package dev.spikeysanju.expensetracker.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

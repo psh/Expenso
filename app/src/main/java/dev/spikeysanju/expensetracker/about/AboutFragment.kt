@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.about
+package dev.spikeysanju.expensetracker.about
 
 import android.content.Intent
 import android.net.Uri
@@ -10,7 +10,7 @@ import androidx.fragment.app.viewModels
 import dev.spikeysanju.expensetracker.BuildConfig
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentAboutBinding
-import dev.spikeysanju.expensetracker.view.BaseFragment
+import dev.spikeysanju.expensetracker.utils.BaseFragment
 
 class AboutFragment : BaseFragment<FragmentAboutBinding, AboutViewModel>() {
     override val viewModel: AboutViewModel by viewModels()

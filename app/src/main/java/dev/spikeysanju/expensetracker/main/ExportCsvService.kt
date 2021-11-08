@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.main
+package dev.spikeysanju.expensetracker.main
 
 import android.content.Context
 import android.net.Uri

@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.dashboard
+package dev.spikeysanju.expensetracker.dashboard
 
 import android.content.Context
 import android.content.Intent

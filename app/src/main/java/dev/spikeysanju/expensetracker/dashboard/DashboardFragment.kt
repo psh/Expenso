@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.dashboard
+package dev.spikeysanju.expensetracker.dashboard
 
 import android.net.Uri
 import android.os.Bundle
@@ -14,6 +14,7 @@ import android.widget.Spinner
 import android.widget.TextView
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.NestedScrollView
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -26,15 +27,15 @@ import dev.spikeysanju.expensetracker.databinding.FragmentDashboardBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.main.ExportState
 import dev.spikeysanju.expensetracker.main.ViewState
-import dev.spikeysanju.expensetracker.view.BaseFragment
-import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
+import dev.spikeysanju.expensetracker.utils.BaseFragment
+import dev.spikeysanju.expensetracker.main.TransactionViewModel
 import dev.spikeysanju.expensetracker.utils.hide
 import dev.spikeysanju.expensetracker.utils.indianRupee
+import dev.spikeysanju.expensetracker.utils.show
+import dev.spikeysanju.expensetracker.utils.snack
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import dev.spikeysanju.expensetracker.utils.show
-import dev.spikeysanju.expensetracker.utils.snack
 import kotlin.math.abs
 
 class DashboardFragment :
@@ -121,15 +122,14 @@ class DashboardFragment :
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
                 // get item position & delete notes
-                val position = viewHolder.adapterPosition
+                val position = viewHolder.absoluteAdapterPosition
                 val transactionItem = transactionAdapter.currentList[position]
                 viewModel.deleteTransaction(transactionItem)
                 Snackbar.make(
                     binding.root,
                     getString(R.string.success_transaction_delete),
                     Snackbar.LENGTH_LONG
-                )
-                    .apply {
+                ).apply {
                         setAction(getString(R.string.text_undo)) {
                             viewModel.insertTransaction(
                                 transactionItem
@@ -197,7 +197,7 @@ class DashboardFragment :
         }
 
         mainDashboardScrollView.setOnScrollChangeListener(
-            NestedScrollView.OnScrollChangeListener { _, sX, sY, oX, oY ->
+            NestedScrollView.OnScrollChangeListener { _, _, sY, _, oY ->
                 if (abs(sY - oY) > 10) {
                     when {
                         sY > oY -> btnAddTransaction.hide()
@@ -230,7 +230,7 @@ class DashboardFragment :
         val spinner = item.actionView as Spinner
 
         val adapter = ArrayAdapter.createFromResource(
-            applicationContext(),
+            requireContext(),
             R.array.allFilters,
             R.layout.item_filter_dropdown
         )
@@ -248,15 +248,15 @@ class DashboardFragment :
                     when (position) {
                         0 -> {
                             viewModel.overall()
-                            (view as TextView).setTextColor(resources.getColor(R.color.black))
+                            (view as TextView).setTextColor(blackColor())
                         }
                         1 -> {
                             viewModel.allIncome()
-                            (view as TextView).setTextColor(resources.getColor(R.color.black))
+                            (view as TextView).setTextColor(blackColor())
                         }
                         2 -> {
                             viewModel.allExpense()
-                            (view as TextView).setTextColor(resources.getColor(R.color.black))
+                            (view as TextView).setTextColor(blackColor())
                         }
                     }
                 }
@@ -277,6 +277,8 @@ class DashboardFragment :
             setUIMode(uiMode, isChecked)
         }
     }
+
+    private fun blackColor() = ResourcesCompat.getColor(resources, R.color.black, null)
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         // Handle action bar item clicks here.
