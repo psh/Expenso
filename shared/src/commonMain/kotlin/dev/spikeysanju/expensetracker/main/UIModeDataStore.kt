@@ -1,4 +1,4 @@
-package dev.spikeysanju.expensetracker.view.main
+package dev.spikeysanju.expensetracker.main
 
 import com.russhwolf.settings.coroutines.FlowSettings
 import kotlinx.coroutines.flow.Flow

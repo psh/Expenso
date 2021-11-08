@@ -21,15 +21,16 @@ import androidx.navigation.fragment.navArgs
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentTransactionDetailsBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
-import dev.spikeysanju.expensetracker.view.main.DetailState
+import dev.spikeysanju.expensetracker.main.DetailState
 import dev.spikeysanju.expensetracker.view.BaseFragment
 import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
-import hide
-import indianRupee
+import dev.spikeysanju.expensetracker.utils.formatDate
+import dev.spikeysanju.expensetracker.utils.hide
+import dev.spikeysanju.expensetracker.utils.indianRupee
 import kotlinx.coroutines.flow.collect
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import show
-import snack
+import dev.spikeysanju.expensetracker.utils.show
+import dev.spikeysanju.expensetracker.utils.snack
 
 class TransactionDetailsFragment : BaseFragment<FragmentTransactionDetailsBinding, TransactionViewModel>() {
     private val args: TransactionDetailsFragmentArgs by navArgs()
@@ -94,7 +95,7 @@ class TransactionDetailsFragment : BaseFragment<FragmentTransactionDetailsBindin
         tag.text = transaction.tag
         date.text = transaction.date
         note.text = transaction.note
-        createdAt.text = transaction.createdAtDateFormat
+        createdAt.text = formatDate(transaction.createdAt)
 
         binding.editTransaction.setOnClickListener {
             val bundle = Bundle().apply {

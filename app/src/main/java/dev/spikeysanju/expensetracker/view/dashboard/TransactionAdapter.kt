@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.ItemTransactionLayoutBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
-import indianRupee
+import dev.spikeysanju.expensetracker.utils.indianRupee
 
 class TransactionAdapter : ListAdapter<TransactionModel, TransactionVH>(DifferCallback) {
 

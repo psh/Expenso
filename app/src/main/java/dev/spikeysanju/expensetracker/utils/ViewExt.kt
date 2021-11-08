@@ -1,10 +1,12 @@
+package dev.spikeysanju.expensetracker.utils
+
 import android.app.DatePickerDialog
 import android.content.Context
 import android.view.View
 import androidx.annotation.StringRes
-import androidx.core.content.ContextCompat
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
+import java.text.DateFormat
 import java.text.NumberFormat
 import java.text.SimpleDateFormat
 import java.util.*
@@ -26,6 +28,9 @@ inline fun View.snack(
     action.invoke(snack)
     snack.show()
 }
+
+fun formatDate(createdAt: Long): String =
+    DateFormat.getDateTimeInstance().format(createdAt)
 
 fun TextInputEditText.transformIntoDatePicker(
     context: Context,

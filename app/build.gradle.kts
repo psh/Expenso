@@ -1,5 +1,4 @@
 plugins {
-    id("com.squareup.sqldelight")
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
@@ -12,8 +11,8 @@ android {
 
     defaultConfig {
         applicationId = "dev.spikeysanju.expensetracker"
-        minSdk = 21
-        targetSdk = 30
+        minSdk = 23
+        targetSdk = 31
         versionCode = 1
         versionName = "v1.0.0-alpha01"
 
@@ -23,10 +22,10 @@ android {
         }
     }
 
-    lint {
-        checkReleaseBuilds = false
-        abortOnError = false
-    }
+//    lint {
+//        checkReleaseBuilds = false
+//        abortOnError = false
+//    }
 
     buildFeatures {
         viewBinding = true
@@ -67,6 +66,9 @@ dependencies {
     implementation("com.russhwolf:multiplatform-settings-datastore:0.8.1")
     implementation("androidx.datastore:datastore-preferences:1.0.0")
 
+    // KMM Migration 4 - add a shared module
+    implementation(project(":shared"))
+
     implementation("androidx.core:core-ktx:1.7.0")
     implementation("androidx.appcompat:appcompat:1.3.1")
     implementation("com.google.android.material:material:1.4.0")
@@ -105,8 +107,3 @@ dependencies {
 
 }
 
-sqldelight {
-    database("AppDatabase") {
-        packageName = "dev.spikeysanju.expensetracker.data.local"
-    }
-}
