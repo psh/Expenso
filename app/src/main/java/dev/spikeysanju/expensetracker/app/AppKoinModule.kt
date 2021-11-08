@@ -1,9 +1,9 @@
-package dev.spikeysanju.expensetracker.di
+package dev.spikeysanju.expensetracker.app
 
 import androidx.datastore.preferences.preferencesDataStore
 import com.russhwolf.settings.datastore.DataStoreSettings
 import dev.spikeysanju.expensetracker.data.local.AppDatabase
-import dev.spikeysanju.expensetracker.view.main.UIModeDataStore
+import dev.spikeysanju.expensetracker.main.UIModeDataStore
 import dev.spikeysanju.expensetracker.repo.DriverFactory
 import dev.spikeysanju.expensetracker.repo.TransactionRepo
 import dev.spikeysanju.expensetracker.view.main.ExportCsvService

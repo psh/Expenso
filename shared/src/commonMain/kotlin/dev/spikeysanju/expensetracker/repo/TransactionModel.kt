@@ -1,7 +1,6 @@
 package dev.spikeysanju.expensetracker.repo
 
-import java.io.Serializable
-import java.text.DateFormat
+expect interface Serializable
 
 data class TransactionModel(
     val id: Int,
@@ -13,9 +12,5 @@ data class TransactionModel(
     val note: String,
     val createdAt: Long
 ) : Serializable {
-    val createdAtDateFormat: String
-        get() = DateFormat.getDateTimeInstance()
-            .format(createdAt) // Date Format: Jan 11, 2021, 11:30 AM
-
     companion object
 }

@@ -24,17 +24,17 @@ import com.google.android.material.snackbar.Snackbar
 import dev.spikeysanju.expensetracker.R
 import dev.spikeysanju.expensetracker.databinding.FragmentDashboardBinding
 import dev.spikeysanju.expensetracker.repo.TransactionModel
-import dev.spikeysanju.expensetracker.view.main.ExportState
-import dev.spikeysanju.expensetracker.view.main.ViewState
+import dev.spikeysanju.expensetracker.main.ExportState
+import dev.spikeysanju.expensetracker.main.ViewState
 import dev.spikeysanju.expensetracker.view.BaseFragment
 import dev.spikeysanju.expensetracker.view.main.TransactionViewModel
-import hide
-import indianRupee
+import dev.spikeysanju.expensetracker.utils.hide
+import dev.spikeysanju.expensetracker.utils.indianRupee
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
-import show
-import snack
+import dev.spikeysanju.expensetracker.utils.show
+import dev.spikeysanju.expensetracker.utils.snack
 import kotlin.math.abs
 
 class DashboardFragment :

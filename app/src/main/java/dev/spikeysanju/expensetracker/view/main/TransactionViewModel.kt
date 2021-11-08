@@ -4,6 +4,10 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dev.spikeysanju.expensetracker.main.DetailState
+import dev.spikeysanju.expensetracker.main.ExportState
+import dev.spikeysanju.expensetracker.main.UIModeDataStore
+import dev.spikeysanju.expensetracker.main.ViewState
 import dev.spikeysanju.expensetracker.repo.TransactionModel
 import dev.spikeysanju.expensetracker.repo.TransactionRepo
 import kotlinx.coroutines.Dispatchers.IO
@@ -116,23 +120,3 @@ class TransactionViewModel(
     }
 }
 
-sealed class DetailState {
-    object Loading : DetailState()
-    object Empty : DetailState()
-    data class Success(val transaction: TransactionModel) : DetailState()
-    data class Error(val exception: Throwable) : DetailState()
-}
-
-sealed class ExportState {
-    object Loading : ExportState()
-    object Empty : ExportState()
-    data class Success(val fileUri: Uri) : ExportState()
-    data class Error(val exception: Throwable) : ExportState()
-}
-
-sealed class ViewState {
-    object Loading : ViewState()
-    object Empty : ViewState()
-    data class Success(val transaction: List<TransactionModel>) : ViewState()
-    data class Error(val exception: Throwable) : ViewState()
-}

@@ -4,6 +4,7 @@ plugins {
     kotlin("multiplatform")
     kotlin("native.cocoapods")
     id("com.android.library")
+    id("com.squareup.sqldelight")
 }
 
 version = "1.0"
@@ -29,18 +30,31 @@ kotlin {
     
     sourceSets {
         val commonMain by getting {
-
+            dependencies {
+                implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2")
+                implementation("com.russhwolf:multiplatform-settings-coroutines:0.8.1")
+            }
         }
+
+        val androidMain by getting {
+            dependencies {
+                implementation("com.squareup.sqldelight:android-driver:1.5.2")
+            }
+        }
+
+        val iosMain by getting {
+            dependencies {
+                implementation("com.squareup.sqldelight:native-driver:1.5.2")
+            }
+        }
+
+        // ---------------------------------------------------------------------------
 
         val commonTest by getting {
             dependencies {
                 implementation(kotlin("test-common"))
                 implementation(kotlin("test-annotations-common"))
             }
-        }
-
-        val androidMain by getting {
-
         }
 
         val androidTest by getting {
@@ -50,8 +64,9 @@ kotlin {
             }
         }
 
-        val iosMain by getting
-        val iosTest by getting
+        val iosTest by getting {
+
+        }
     }
 }
 
@@ -63,3 +78,10 @@ android {
         targetSdkVersion(31)
     }
 }
+
+sqldelight {
+    database("AppDatabase") {
+        packageName = "dev.spikeysanju.expensetracker.data.local"
+    }
+}
+

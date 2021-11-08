@@ -1,6 +1,6 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
-    val kotlin_version = "1.5.31"
+    val kotlinVersion = "1.5.31"
 
     repositories {
         google()
@@ -9,7 +9,7 @@ buildscript {
 
     dependencies {
         classpath("com.android.tools.build:gradle:7.0.3")
-        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version")
+        classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion")
         classpath("androidx.navigation:navigation-safe-args-gradle-plugin:2.3.5")
         classpath("com.squareup.sqldelight:gradle-plugin:1.5.2")
     }

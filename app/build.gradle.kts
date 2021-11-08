@@ -1,5 +1,4 @@
 plugins {
-    id("com.squareup.sqldelight")
     id("com.android.application")
     id("kotlin-android")
     id("kotlin-kapt")
@@ -108,8 +107,3 @@ dependencies {
 
 }
 
-sqldelight {
-    database("AppDatabase") {
-        packageName = "dev.spikeysanju.expensetracker.data.local"
-    }
-}

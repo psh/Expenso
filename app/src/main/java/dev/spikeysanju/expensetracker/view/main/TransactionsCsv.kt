@@ -2,6 +2,7 @@ package dev.spikeysanju.expensetracker.view.main
 
 import com.opencsv.bean.CsvBindByName
 import dev.spikeysanju.expensetracker.repo.TransactionModel
+import dev.spikeysanju.expensetracker.utils.formatDate
 
 data class TransactionsCSV(
     @CsvBindByName(column = "title")
@@ -28,7 +29,7 @@ fun List<TransactionModel>.toCsv() = map {
         tag = it.tag,
         date = it.date,
         note = it.note,
-        createdAtDate = it.createdAtDateFormat,
+        createdAtDate = formatDate(it.createdAt),
     )
 }
 
